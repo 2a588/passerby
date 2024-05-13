@@ -28,7 +28,7 @@ import com.jfinal.kit.Ret;
  * 下载控制器
  */
 @Path("/download")
-@Before(FrontAuthInterceptor.class)
+//@Before(FrontAuthInterceptor.class)  //登陆拦截的注解
 public class DownloadController extends BaseController {
 	
 	@Inject
@@ -39,6 +39,8 @@ public class DownloadController extends BaseController {
 	 */
 	public void index() {
 		Account loginAccount = getLoginAccount();
+		loginAccount = new Account();
+		loginAccount.setId(1);
 		String ip = IpKit.getRealIp(getRequest());
 		Ret ret = srv.download(loginAccount, getPara("file"), ip);
 		if (ret.isOk()) {

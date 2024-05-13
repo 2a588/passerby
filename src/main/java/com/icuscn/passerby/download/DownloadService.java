@@ -18,7 +18,11 @@ import com.icuscn.passerby.common.model.Account;
 import com.icuscn.passerby.common.model.Download;
 import com.jfinal.kit.LogKit;
 import com.jfinal.kit.Ret;
+import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.ehcache.CacheKit;
+
+
 
 import java.util.Date;
 import java.util.List;
@@ -61,11 +65,11 @@ public class DownloadService {
 	private void processDownloadCount(Account loginAccount, Download download, String ip) {
 		String sql = "select ip from download_log where ip=? and downloadDate = ? and fileName = ? limit 1";
 		String todayDate = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new Date());
-//		if (Db.query(sql, ip, todayDate, download.getFileName()).size() == 0) {
-//			Db.update("update download set downloadCount = downloadCount + 1 where id = ?", download.getId());
-//			Record downloadLog = new Record().set("ip", ip).set("fileName", download.getFileName()).set("downloadDate", new Date());
-//			downloadLog.set("accountId", loginAccount.getId());
-//			Db.save("download_log", downloadLog);
-//		}
+		if (Db.query(sql, ip, todayDate, download.getFileName()).size() == 0) {
+			Db.update("update download set downloadCount = downloadCount + 1 where id = ?", download.getId());
+			Record downloadLog = new Record().set("ip", ip).set("fileName", download.getFileName()).set("downloadDate", new Date());
+			downloadLog.set("accountId", loginAccount.getId());
+			Db.save("download_log", downloadLog);
+		}
 	}
 }
