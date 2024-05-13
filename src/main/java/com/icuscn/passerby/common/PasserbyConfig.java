@@ -65,7 +65,7 @@ public class PasserbyConfig extends JFinalConfig {
 	 */
 	static void loadConfig() {
 		if (p == null) {
-			p = PropKit.useFirstFound("jfinal-club-config-pro.txt", "jfinal-club-config-dev.txt");
+			p = PropKit.useFirstFound("jfinal-club-config-pro.txt", "passerby-config-dev.txt");
 		}
 	}
 	
