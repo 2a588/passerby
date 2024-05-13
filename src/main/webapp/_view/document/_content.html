@@ -1,0 +1,30 @@
+<div class="col jf-doc-box jf-pdr0" id="ajaxContainer">
+	<div class="jf-doc-contentbox">
+		<!--doc內容 start-->
+		<h1 class="jf-doc-title">#(doc.mainMenu).#(doc.subMenu) #(doc.title)</h1>
+		<div class="jf-doc-content">
+#(doc.content)
+		</div>
+		<!--doc內容 end-->
+		
+		
+		### 跳转到上一节与下一节的链接
+		<div class="doc-pre-next-box clearfix">
+			<div class="previousDoc">
+				#if(doc.previous ??)
+					#set(t = doc.previous)
+					<a href="/doc/#(t.mainMenu)-#(t.subMenu)">&lt; #(t.mainMenu).#(t.subMenu) #(t.title)</a>
+				#end
+			</div>
+			
+			<div class="nextDoc">
+				#if(doc.next ??)
+					#set(t = doc.next)
+					<a href="/doc/#(t.mainMenu)-#(t.subMenu)">#(t.mainMenu).#(t.subMenu) #(t.title) &gt;</a>
+				#end
+			</div>
+		</div>
+		
+		
+	</div>
+</div>

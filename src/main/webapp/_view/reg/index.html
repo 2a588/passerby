@@ -1,0 +1,119 @@
+#set(seoTitle="JFinal 注册账号")
+#@layout()
+#define main()
+<div class="col" style="margin-bottom: 20px;">
+
+	<!-- 注册 panel -->
+	<div id="regPanel" class="jf-panel">
+		<div class="jf-panel-header">
+			<h1 class="jf-login-title text-center">注册</h1>
+		</div>
+	 	
+		<div class="jf-panel-body mt15" style="width: 500px;margin:30px auto;">
+			<!-- 内容区域  start-->
+			<form id="reg_form" action="/reg/save" method="post">
+				<div class="form-group row mb-4">
+					<label for="nickName" class="col-sm-2 col-form-label col-form-label-lg">昵称</label>
+				    <div class="col-sm-10">
+						<input type="text" autocomplete="off" class="form-control form-control-lg" id="nickName" name="nickName" placeholder="请输入昵称">
+				    </div>
+				</div>
+				<div class="form-group row mb-4">
+					<label for="userName" class="col-sm-2 col-form-label col-form-label-lg">邮箱</label>
+				    <div class="col-sm-10">
+						<input type="email" autocomplete="off" class="form-control form-control-lg" id="userName" name="userName" placeholder="请输入邮箱地址">
+				    </div>
+				</div>
+				
+				<div class="form-group row mb-4">
+					<label for="password" class="col-sm-2 col-form-label col-form-label-lg">密码</label>
+				    <div class="col-sm-10">
+						<input type="password" autocomplete="off" class="form-control form-control-lg" id="password" name="password" placeholder="请输入密码">
+				    </div>
+				</div>
+				<div class="form-group row mb-4">
+					<label class="col-sm-2 col-form-label-lg">
+						<img title="点击刷新" onclick="updateRegCaptcha()" id="captchaImg" class="jf-login-captcha" src="/reg/captcha"/>
+					</label>
+				    <div class="col-sm-10">
+				    		<input type="text" autocomplete="off" class="form-control form-control-lg" id="captchaInput" name="captcha" placeholder="请输入验证码">
+				    </div>
+				</div>
+				
+				  <div class="form-group row">
+				    <div class="col-12 text-right">
+				      <button type="submit" class="btn btn-primary btn-lg" style="padding-left:20px;padding-right:20px;">注册账号</button>
+				    </div>
+				  </div>
+				  
+			</form>
+			<div class="jf-login-links">
+				已有账号<a href="/login">直接登录</a>
+				<a class="ml-2"  href="/reg/notActivated">还没激活？</a>
+			</div>
+			<!-- 内容区域  end-->
+		</div>
+	</div>
+ 	
+ 	<!-- 注册成功 panel -->
+ 	<div id="regOkPanel" class="jf-panel" style="min-height: 400px; display: none;">
+		<div class="jf-panel-header" style="margin-top:50px;">
+			<h1 class="jf-login-title text-center">注册成功</h1>
+		</div>
+	 	
+		<div class="jf-panel-body mt15" style="min-width: 500px;margin:30px auto;">
+			<!-- 内容区域  start-->
+			<div id="reg_ok_msg" style="text-align: center; font-size: 22px; margin-top: 40px;">
+				请去往注册邮箱&nbsp;
+				<span style="color:red;" id="regEmail">nickName</span>&nbsp;
+				查收激活邮件激活账号
+			</div>
+			<!-- 内容区域  end-->
+		</div>
+	</div>
+ 	
+</div>
+#end
+
+#define js()
+	<script type="text/javascript" src="/assets/jquery_form/jquery.form.js"></script>
+	<script type="text/javascript" src="/assets/layer/layer/layer.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#reg_form").ajaxForm({
+				dataType: "json"
+				, beforeSubmit: function(formData, jqForm, options) {
+				     // 表单提交之前回调
+				}
+				, success: function(ret) {
+					if(ret.state == "ok") {
+						$("#regPanel").hide();
+						$("#regOkPanel").show();
+						$("#regEmail").text(ret.regEmail);
+					} else {
+						layer.msg(ret.msg, {
+									shift: 6
+									, shade: 0.3
+									, time: 0
+									, offset: "165px"
+									, closeBtn: 1
+									, shadeClose: false
+								} , function() {
+									updateRegCaptcha();
+								}
+							);
+					}
+					
+				}
+				, error: function(ret) { }              // ret.status != 200 时回调
+				, complete: function(ret) { }       // 无论是 success 还是 error，最终都会被回调
+			});
+		});
+
+		function updateRegCaptcha() {
+			$("#captchaImg").attr("src", "/reg/captcha?v=" + Math.random());
+			$("#captchaInput").val("");
+		}
+	</script>
+#end

@@ -1,0 +1,129 @@
+#define layout()
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="referrer" content="always">
+	
+	<meta name="keywords" content="#(seoKeywords ?? 'JFinal,JFinal官网,JFinal教程,JFinal微信,JFinal Weixin,极速开发,快速开发框架,web框架')">
+	<meta name="description" content="#(seoDescr ?? 'JFinal 极速开发官方网站')">
+	<title>#(seoTitle ?? "JFinal 极速开发官方社区")</title>
+	
+	<link rel="shortcut icon" type="image/x-icon" href="/assets/img/favicon.ico">
+	<link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.min.css">
+	
+	<link rel="stylesheet" href="/assets/css/bootstrap.min-4.3.1.css">
+	<link rel="stylesheet" href="/assets/css/jfinal-com-4.0.css">
+	#@css?()
+</head>
+
+<!--如果不需要悬浮的header 就去掉body上的class-->
+<body class="jf-header-fixed">
+	<!--header部分 -->
+	<div class="jf-header">
+		<div class="container">
+			<div class="row">
+				<a href="#(SSL)/" class="jf-logo" title="返回首页">
+					<img src="/assets/img/jfinallogo.png" />
+				</a>
+				
+				<div class="col">
+					<ul id="main_menu" class="jf-header-navs">
+						<li><a href="#(SSL)/">首页</a></li>
+						###<li><a href="#(SSL)/coffee">新导航</a></li>
+						<li><a href="#(SSL)/doc">文档</a></li>
+						<li><a href="#(SSL)/project">项目</a></li>
+						<li><a href="#(SSL)/share">分享</a></li>
+						<li><a href="#(SSL)/feedback">反馈</a></li>
+					</ul>
+				</div>
+				
+				<!--搜索框-->
+				<div class="jf-header-searchbox">
+					<div class="input-group">
+						<form action="https://www.baidu.com/s?ie=utf-8&wd=site:jfinal.com%20" onsubmit = "return search();" target="_blank">
+							<input id="q" name="wd" type="text" class="form-control text-black-50" placeholder="搜索项目、分享...">
+						</form>
+					</div>
+				</div>
+				
+				<!--用户登录注册和登录后样式-->
+				<div class="jf-header-user">
+				
+				#if(loginAccount)
+					<!--登录后用下面这个-->
+					<div class="jf-header-loged">
+					<div class="jf-header-avatar">
+						<a href="/my">
+							<img src="/upload/avatar/#(loginAccount.avatar)" />
+						</a>
+						<span class="fa fa-sort-desc p-1 ml-1"></span>
+					</div>
+					
+					<div class="jf-header-Layer">
+						<div class="list-group list-group-flush">
+							<a href="#(SSL)/my" class="list-group-item list-group-item-action"><i class="fa fa-home font14"></i><span class="ml-2">个人中心</span></a>
+							<a href="#(SSL)/my/referMe" class="list-group-item list-group-item-action"><i class="fa fa-at font14"></i><span class="ml-2">提到我</span></a>
+							<a href="#(SSL)/my/message" class="list-group-item list-group-item-action"><i class="fa fa-envelope-o font14"></i><span class="ml-2">我的私信</span></a>
+							<a href="javascript:void(0);" onclick="logout();" class="list-group-item list-group-item-action"><i class="fa fa-sign-out font14"></i><span class="ml-2">退出登录</span></a>
+						</div>
+					</div>
+					</div>
+					
+					#if(_remind)
+						<div class="remind-layer">
+							<i class="remind-layer-caret-up"></i>
+							#if(_remind.referMe > 0)<a href="#(SSL)/my/referMe">#(_remind.referMe) 条@提到我</a>#end
+							#if(_remind.fans > 0)<a href="#(SSL)/my/fans">#(_remind.fans) 位新粉丝</a>#end
+							#if(_remind.message > 0)<a href="#(SSL)/my/message">#(_remind.message) 条私信</a>#end
+						</div>
+					#end
+				
+				#else
+					<!--没登录用这个-->
+					<a href="#(SSL)/login" class="jf-user-login" onclick="appendReturnUrl(this)">登录</a>
+					<a href="#(SSL)/reg" class="jf-user-login">注册</a>
+				#end
+				
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+	<!--主体内容-->
+	<div class="jf-page-container">
+		<div class="container">
+			<div class="row">
+<!--左侧主体内容部分-->
+#@main()	
+			</div>
+		</div>
+	</div>
+
+
+	<div class="jf-footer">
+		<div class="container">
+			<ul class="jf-footerlinks">
+				<li><a target="_blank" href="#(SSL)/share/1">关于JFinal</a></li>
+				<li><a target="_blank" href="https://git.oschina.net/jfinal/jfinal">开源中国git</a></li>
+				###<li><script src="https://s5.cnzz.com/z_stat.php?id=1000336597&web_id=1000336597" language="JavaScript"></script></li>
+				<li><a target="_blank" href="http://www.miitbeian.gov.cn/">京ICP备10217229号-2</a></li>
+			</ul>
+		</div>
+		
+		<div class="jf-copyright">
+			### ©JFinal(<a target="_blank" href="https://jfinal.com">jfinal.com</a>)京ICP备10217229号-2
+		</div>
+	</div>
+	
+	<script src="/assets/jquery/jquery.min-3.3.1.js"></script>
+	
+	<script src="/assets/js/bootstrap.min-4.3.1.js"></script>
+	<script src="/assets/js/jfinal-com-4.0.js?v1"></script>
+	#@js?()
+</body>
+</html>
+#end

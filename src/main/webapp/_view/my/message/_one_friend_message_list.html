@@ -1,0 +1,277 @@
+<div class="newsfeed-reply-list-box">
+    <ul class="newsfeed-reply-list">
+
+        <li style="padding: 22px 0px;">
+            <img class="avatar" src="/upload/avatar/#(loginAccount.avatar)">
+            <div class="item">
+                <textarea id="replyContent" oninput="autoHeight(this, 35);" onkeyup="autoHeight(this, 35);" placeholder=""></textarea>
+                <span class="newsfeed-reply-submit" title="按 Ctrl + Enter 发送">发送</span>
+                <img class="newsfeed-reply-loading" src="/assets/img/loading-2.gif" >
+            </div>
+        </li>
+
+        #for(x : messagePage.list)
+            <li>
+                <a href="/user/#(x.sender)">
+                    <img class="avatar" src="/upload/avatar/#(x.avatar)">
+                </a>
+                <div class="item">
+                    <a class="user-name" href="/user/#(x.sender)">#(x.nickName)</a>
+                    <div class="jf-message-btn-box">
+                        <span>#date(x.createAt, "yyyy-MM-dd HH:mm")</span>
+                        <a href="javascript:void(0);" onclick="deleteByMessageId(this, #(x.id));">删除</a>
+                    </div>
+
+                    <div class="text">
+                        #(x.content)
+                    </div>
+                </div>
+            </li>
+        #end
+    </ul>
+</div>
+
+<!-- 包含分页组件 -->
+#@paginate(messagePage.pageNumber, messagePage.totalPage, "/my/message/friend/" + friend.id + "?p=")
+
+#define css()
+<style type="text/css">
+.newsfeed-reply-list-box {
+	position: relative;
+	
+	margin: 18px 15px 25px 15px;"
+	margin-top: 18px;
+	
+	text-align: center;
+	font-size: 18px;
+	
+	/*background-color: #EEEEEE;*/
+	/*background-color: #f3f3f3;*/
+	/*background-color: #f5f5f5;*/
+	background-color: #f9f9f9;
+
+	border-radius: 3px;
+	border: 1px solid #b8b8b8;
+	/*border: 1px solid #c0c0c0;*/
+	/*border: 1px solid #c8c8c8;*/
+	/*border: 1px solid #d0d0d0;*/
+	/*border: 1px solid #d8d8d8;*/
+	/*display: none;*/
+}
+
+#replyContent {
+	width: 92%; 
+}
+
+.newsfeed-reply-list {
+	list-style-type: none;
+	padding: 3px 15px 0 15px;
+	
+	word-wrap: break-word;
+	word-break: break-all;
+}
+.newsfeed-reply-list li {
+	// border-bottom: 1px solid #f9f9f9;
+	border-bottom: 1px dashed #cccccc;
+	padding: 15px 0;
+}
+.newsfeed-reply-list > li:last-child {
+	border-bottom-width: 0;
+}
+
+.newsfeed-reply-list .avatar {
+	float: left;
+	height: 35px;
+	width: 35px;
+}
+.newsfeed-reply-list .item {
+	position: relative;
+	margin-left: 48px;
+	text-align: left;
+	min-height: 35px;
+}
+.newsfeed-reply-list .item textarea {
+	display: block;
+	word-wrap: break-word;
+	word-break: break-all;
+
+	/* 去掉div获取焦点的时候的虚框效果 */
+	outline: none;
+	-moz-outline: 0;
+	resize: none;
+	/* 去掉x y 轴两个滚动条 */
+	overflow: hidden;
+
+	/*border: 1px solid #9a9a9a;*/
+	border: 1px solid #4682b4;
+	background-color: #fff;
+	/*width: 510px;*/
+	width: 500px;
+	height: 35px;
+
+	/* 上下方向的 padding 值合适，才能避免在输入时高度不合理减少 */
+	padding: 4px 6px 4px 6px;
+
+	font-size: 18px;
+	line-height: 1.5;
+}
+
+/* 动态回复发送按钮 */
+.newsfeed-reply-submit {
+	position: absolute;
+	right: 0;
+	// bottom: 3px;
+	bottom: 1px;
+	// padding: 2px 6px 3px 6px;
+	padding: 4px 9px 5px 8px;
+	background-color: #4682b4;
+	color: #ffffff;
+	font-size: 16px;
+	border-radius: 3px;
+}
+.newsfeed-reply-submit:hover {
+	color: #ffffff;
+	cursor: pointer;
+	background-color: #204d74;
+}
+.newsfeed-reply-loading {
+	position: absolute;
+	right: 7px;
+	bottom: 2px;
+	display: none;
+}
+
+.newsfeed-reply-list .item .user-name {
+	line-height: 1;
+	display: inline-block;
+	vertical-align: text-top;
+	
+	color: #337ab7;
+}
+.newsfeed-reply-list .item .text {
+	margin-top: 2px;
+    line-height: 1.6;
+    font-size: 16px;
+}
+/* 列表内的添加 @xx 内容的回复按钮 */
+.newsfeed-reply-link {
+	float: right;
+	color: #2d64b6;
+	font-size: 16px;
+	margin-right: 5px;
+	cursor: pointer;
+}
+.newsfeed-more-reply {
+	text-align: center;
+}
+
+.jf-message-btn-box {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 16px;
+}
+.jf-message-btn-box span {
+    color: #a0a0a0;
+    margin-right: 15px;
+}
+.jf-message-btn-box a {
+    margin-right: 5px;
+    color: #337ab7;
+}
+</style>
+#end
+
+#define js()
+	<script type="text/javascript" src="/assets/js/my-space-4.0.js"></script>
+	<script type="text/javascript" src="/assets/layer/layer/layer.js"></script>
+	
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#replyContent").focus();
+            bindSubmitEvent(#(friend.id));
+		});
+		
+        /**
+         * 为发送按钮定事件
+         */
+        function bindSubmitEvent(friendId) {
+            var newsFeedReplyListBox = $("div.newsfeed-reply-list-box");
+            var submitBtn = newsFeedReplyListBox.find("span.newsfeed-reply-submit");
+            var submitLoading = newsFeedReplyListBox.find("img.newsfeed-reply-loading");
+            var textarea = $("#replyContent");
+
+            var map = {
+                isLoading: false
+                , submit_btn: submitBtn
+                , submit_loading: submitLoading
+                , textarea: textarea
+                , friendId: friendId
+            };
+
+            submitBtn.bind("click", function() {
+                sendMessage("/my/message/send", map);
+            });
+
+            textarea.bind("keydown", function(e) {
+                if ((e.ctrlKey || e.metaKey) && e.keyCode==13) {    // ctrl + 回车发送消息
+                    sendMessage("/my/message/send", map);   // $("#submit_btn").trigger("click");   // 简写 $("#submit_btn").click();
+                }
+            });
+        }
+        // 发送消息
+        function sendMessage(url, map) {
+            if (map.isLoading) {
+                return ;
+            }
+
+            $.ajax(url, {
+                type: "POST"
+                , cache: false
+                , dataType: "json"
+                , data: {
+                    friendId : map.friendId,
+                    replyContent: map.textarea.val()
+                }
+                , beforeSend: function() {
+                    var textAreaVal = map.textarea.val();
+                    if (textAreaVal == null || textAreaVal == "") {
+                        showReplyErrorMsg("请先输入要发送的内容！");
+                        return false;
+                    }
+
+                    map.isLoading = true;
+                    map.submit_btn.hide();
+                    map.submit_loading.show();
+                }
+                , success: function(ret) {
+                    if (ret.state == "ok") {
+                        map.textarea.focus();                                // 添加 focus() 避免 IE 有时将光标停在最前方
+                        map.textarea.val("").focus();                        // 回复完成后，textarea 清空内容并设置焦点
+                        map.textarea.css({height:"35px"});                   // 数据清空后，高度重置一下，注意高度与 css 文件中保持一致
+                        map.textarea.parent().parent().after(ret.replyItem); // 插入刚刚回复的内容 replyItem
+                    } else {
+                        showReplyErrorMsg(ret.msg);                   // 调用 jfinal-com-v1.0.js 的方法，与 share reply 中共用的功能
+                    }
+                }
+                , complete: function() {
+                    map.submit_loading.hide();
+                    map.submit_btn.show();
+                    map.isLoading = false;
+                }
+            });
+        }
+
+        // 删除某一条私信
+        function deleteByMessageId(self, messageId) {
+            confirmAjaxGet("删除后无法恢复，确定要删除？", "/my/message/deleteByMessageId?messageId=" + messageId, {
+                success: function(ret) {
+                    if (ret.state == "ok") {
+                        $(self).parents(".newsfeed-reply-list li").remove();
+                    }
+                }
+            });
+        }
+
+    </script>
+#end

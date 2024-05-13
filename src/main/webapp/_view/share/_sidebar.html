@@ -1,0 +1,39 @@
+<div class="jf-page-side">
+	<div class="jf-panel" style="padding: 4px;background: transparent;">
+		<a class="btn btn-secondary d-block" style="padding: 10px;" href="/my/share/add">我要分享</a>
+	</div>
+	
+	#include("/_view/adv/_sponsor.html")
+	
+	<!--热门分享-->
+	<div class="jf-panel">
+		<div class="jf-panel-header">
+			<h1>热门分享</h1>
+		</div>
+		<div class="jf-panel-body">
+			<ul class="jf-hot-list">
+			#for(x : hotShare)
+				<li>
+					<a href="/share/#(x.id)">#(x.title)</a>
+				</li>
+			#end
+			</ul>
+		</div>
+	</div>
+	
+	#--
+		这里还差一个 google 广告位，暂时不加了
+	--#
+	
+	#-- --#
+	<!--扫码入社-->
+	<div class="jf-panel">
+		<div class="jf-panel-header">
+			<h1>扫码入社</h1>
+		</div>
+		<div class="jf-panel-body text-center">
+			<img src="/assets/img/jfinal_weixin_service_qr_code_226.jpg" />
+		</div>
+	</div>
+	
+</div>

@@ -1,0 +1,79 @@
+#set(seoTitle="我的项目")
+#@layout()
+#define main()
+<!--左侧部分 -->
+#include("../common/_my_left_side.html")
+
+<!--右侧部分 -->
+<div class="col jf-page-main jf-pdr0">
+	<div class="jf-panel jf-my-space-pd">
+		<div class="jf-panel-body">
+			
+			<!-- 内容区域  start-->
+			<nav aria-label="breadcrumb">
+				<a href="/my/project/add" target="_blank" class="btn btn-info pull-right" style="top: -5px;position: relative;"><i class="fa fa-pencil mr-1"></i>创建新项目</a>
+				<ol class="breadcrumb jf-my-breadcrumb">
+					<li class="breadcrumb-item"><a href="/my">我的空间</a></li>
+					<li class="breadcrumb-item active" aria-current="page">项目</li>
+				</ol>
+			</nav>
+			
+			<div class="jf-project-list jf-my" id="project_list">
+			
+			#setLocal(i=0, j=0)
+			#for(x : projectList)
+				#if(for.first || ++i % 3 == 0)
+				<div class="row">
+				#end
+					<div class="col-4">
+						<div class="jf-project-item  jf-transition ">
+							<a href="/project/#(x.id)" target="_blank" class="jf-project-logo">
+								<img src="/upload/avatar/#(loginAccount.avatar)" />
+							</a>
+							<h1 class="jf-project-name">
+								<a style="height:100%;" href="/project/#(x.id)" target="_blank">#(x.title)</a>
+							</h1>
+							
+							### 暂不开启点赞、访问等数据显示
+							### <p class="jf-project-info"><span><i class="fa fa-eye"></i>&nbsp;305</span><span><i class="fa fa-star"></i>&nbsp;25</span><span><i class="fa fa-thumbs-o-up"></i>&nbsp;99</span></p>
+							
+							<p class="mt-3 jf-project-opt">
+								<a href="/my/project/edit?id=#(x.id)" target="_blank">
+									<i class="fa fa-edit text-info"></i>
+								</a>
+								<a class="ml-3" href="#" deleteId="#(x.id)">
+									<i class="fa fa-trash text-danger"></i>
+								</a>
+							</p>
+						</div>
+					</div>
+				#if(for.last || ++j % 3 == 0)
+				</div>
+				#end
+			#end
+			
+			</div> 
+			<!-- 内容区域  end-->
+			
+		</div>
+	</div>
+</div>
+#end
+
+
+#define js()
+	<script type="text/javascript" src="/assets/js/my-space-4.0.js"></script>
+	<script type="text/javascript" src="/assets/layer/layer/layer.js"></script>
+	
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#project_list [deleteId]").on("click", function(event) {
+				event.preventDefault();	// 取代 return false 防止页面跳转
+				
+				var deleteId = $(this).attr("deleteId");
+				var actionUrl = "/my/project/delete?id=" + deleteId;
+				confirmAction("删除后无法恢复，确定要删除？", actionUrl);
+			});
+		});
+	</script>
+#end

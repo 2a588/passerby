@@ -1,0 +1,31 @@
+#set(seoTitle=user.nickName + "的动态消息")
+#@layout()
+#define main()
+<!--左侧部分 -->
+#include("../common/_user_left_side.html")
+
+<!--右侧部分 -->
+<div class="col jf-page-main jf-pdr0">
+	<div class="jf-panel jf-my-space-pd" style="min-height: 456px;">
+		<div class="jf-panel-header" style="padding-bottom: 22px;">
+			<div class="jf-my-navtabs2" id="newsfeed_tab">
+				<a href="/user/#(user.id)" class="active"><i class="fa fa-comments"></i>动态</a>
+			</div>
+		</div>
+		
+		#include("/_view/my/newsfeed/_news_feed_list.html")		
+		
+	</div>
+</div>
+#end
+
+#define js()
+	<script type="text/javascript" src="/assets/js/my-space-4.0.js"></script>
+	<script type="text/javascript" src="/assets/layer/layer/layer.js"></script>
+	
+	<script type="text/javascript">
+		$(document).ready(function() {
+			setCurrentUserMenu();
+		});
+	</script>
+#end

@@ -1,0 +1,68 @@
+#set(seoTitle="我的收藏")
+#@layout()
+#define main()
+<!--左侧部分 -->
+#include("../common/_my_left_side.html")
+
+<!--右侧部分 -->
+<div class="col jf-page-main jf-pdr0">
+	<div class="jf-panel jf-my-space-pd">
+		<div class="jf-panel-body">
+			<!-- 内容区域  start-->
+			<nav aria-label="breadcrumb">
+				###<a href="/my/share/add" target="_blank" class="btn btn-info pull-right" style="top: -5px;position: relative;"><i class="fa fa-pencil mr-1"></i>创建新分享</a>
+				<ol class="breadcrumb jf-my-breadcrumb">
+					<li class="breadcrumb-item"><a href="/my">我的空间</a></li>
+					<li class="breadcrumb-item active" aria-current="page">收藏</li>
+				</ol>
+			</nav>
+			
+			<table class="table table-bordered table-hover jf-my-table jf-table-border">
+				<tbody>
+					#for(x : favoriteList)
+					<tr>
+						<td>
+							<a href="#(x.getRefUrl())" target="_blank">#(x.title)</a>
+						</td>
+						<td class="text-center" style="width: 150px;">
+							#date(x.createAt)
+						</td>
+						<td class="text-center" style="width: 80px;">
+							
+							<a title="删除" href="/" deleteId="#(x.id)">
+								<i class="fa fa-trash text-danger"></i>
+							</a>
+						</td>
+					</tr>
+					#end
+				</tbody>
+			</table>
+			
+			<!--分页组件-->
+			### 暂时未添加分页
+			<!-- 内容区域  end-->
+		</div>
+	</div>
+
+</div>
+#end
+
+#define js()
+	<script type="text/javascript" src="/assets/js/my-space-4.0.js"></script>
+	<script type="text/javascript" src="/assets/layer/layer/layer.js"></script>
+	
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("table [deleteId]").on("click", function(event) {
+				event.preventDefault();	// 取代 return false 防止页面跳转
+				
+				var deleteId = $(this).attr("deleteId");
+				var actionUrl = "/my/favorite/delete?id=" + deleteId;
+				confirmAction("删除后无法恢复，确定要删除？", actionUrl);
+			});
+		});
+	</script>
+#end
+
+
+

@@ -1,0 +1,51 @@
+#set(seoTitle="我的关注")
+#@layout()
+#define main()
+<!--左侧部分 -->
+#include("../common/_my_left_side.html")
+
+<!--右侧部分 -->
+<div class="col jf-page-main jf-pdr0">
+	<div class="jf-panel jf-my-space-pd">
+		<div class="jf-panel-body">
+			<nav aria-label="breadcrumb ">
+				<ol class="breadcrumb jf-my-breadcrumb">
+					<li class="breadcrumb-item"><a href="/my">我的空间</a></li>
+					<li class="breadcrumb-item active" aria-current="page">关注</li>
+				</ol>
+			</nav>
+			
+			<div class="friends-box">
+				#for(x : followPage.getList())
+					<div class="friend">
+						<a href="/user/#(x.id)">
+							<img src="/upload/avatar/#(x.avatar)">
+						</a>
+						<a href="/user/#(x.id)" title="#(x.nickName)">#(x.nickName)</a>
+						<!-- 我的关注，同时又是我的粉丝，为互粉状态，故为取消互粉，否则为取消关注 -->
+						#if(x.isMyFans)
+							<span onclick="deleteFriend(this, #(x.id));">取消互粉</span>
+						#else
+							<span onclick="deleteFriend(this, #(x.id));">取消关注</span>
+						#end
+					</div>
+				#end
+			</div>
+			
+			#@paginate(followPage.pageNumber, followPage.totalPage, "/my/follow?p=")
+			
+		</div>
+	</div>
+</div>
+#end
+
+#define js()
+	<script type="text/javascript" src="/assets/js/my-space-4.0.js"></script>
+	<script type="text/javascript" src="/assets/layer/layer/layer.js"></script>
+	
+	<script type="text/javascript">
+		$(document).ready(function() {
+			
+		});
+	</script>
+#end

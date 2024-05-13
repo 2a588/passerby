@@ -1,0 +1,116 @@
+#set(seoTitle="创建项目")
+#@layout()
+#define main()
+<div class="col">
+	<div class="jf-panel jf-my-space-pd">
+		<div class="jf-panel-header">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item">
+						<a class="text-secondary" href="/my" target="_blank">个人空间</a>
+					</li>
+					<li class="breadcrumb-item">
+						<a class="text-secondary" href="/my/project" target="_blank">项目</a>
+					</li>
+					<li class="breadcrumb-item active" aria-current="page">创建项目</li>
+				</ol>
+
+			</nav>
+		</div>
+		<div class="jf-panel-body">
+			<!-- 内容区域  start-->
+			<form id="myArticleForm" action="/my/project/save" method="post">
+
+				<div class="row">
+				
+					<div class="col-6">
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text">名称</span>
+							</div>
+							<input name="project.name" type="text" maxlength="20" class="form-control" placeholder="项目唯一标识" />
+						</div>
+					</div>
+					
+					<div class="col-6">
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text">标题</span>
+							</div>
+							<input name="project.title" type="text" maxlength="40" class="form-control" placeholder="项目文章标题" />
+						</div>
+					</div>
+					
+				</div>
+				<fieldset>
+					<legend>正文内容</legend>
+					<div class="form-group mt-3">
+					
+						### <textarea class="form-control" style="height: 600px;"></textarea>
+						
+						<script id="container" name="project.content" style="line-height: 20px;"  type="text/plain"></script>
+						
+					</div>
+				</fieldset>
+				
+				<div class="form-group mt-3 mb-3 text-center">
+					<button type="submit" class="btn btn-info btn-lg" style="width: 160px;" ><i class="fa fa-check mr-1"></i>确认发布</button>
+				</div>
+			</form>
+			<!-- 内容区域  end-->
+		</div>
+	</div>
+</div>
+#end
+
+#define js()
+	<script type="text/javascript" src="/assets/jquery_form/jquery.form.min.js"></script>
+	<script type="text/javascript" src="/assets/layer/layer/layer.js"></script>
+	
+	### 添加支持 ueditor 组件的 js 文件与初始化函数
+	#include("../common/_ueditor_js.html")
+	
+	<script type="text/javascript">
+		// 上传时在 url 中用问号挂参的方式添加额外的参数 uploadType，用于分类管理图片
+		ue.ready(function() {
+			ue.execCommand('serverparam', {
+				'uploadType': 'project'
+			});
+		});
+
+		// 也用 ajax 提交比较好，这样有利于在出异常的时候信息不会丢失
+		$(document).ready(function() {
+			$("#myArticleForm").ajaxForm({
+				dataType: "json"
+				, beforeSubmit: function(formData, jqForm, options) {
+					ue.sync();  // 同步一下 ueditor 中的数据到表单域
+				}
+				, success: function(ret) {
+					if (ret.state == "ok") {
+						location.href = "/my/project";
+					} else {
+						showErrorMsg(ret.msg);
+					}
+				}
+				, error: function(ret) {
+					alert(ret);
+				}
+				, complete: function(ret) { }       // 无论是 success 还是 error，最终都会被回调
+			});
+		});
+
+		function showErrorMsg(msg) {
+			layer.msg(msg, {
+					shift: 6
+					, shade: 0.4
+					, time: 0
+					, offset: "140px"
+					, closeBtn: 1
+					, shadeClose: true
+					,maxWidth: "1000"
+				}, function () {}
+			);
+		}
+
+	</script>
+#end

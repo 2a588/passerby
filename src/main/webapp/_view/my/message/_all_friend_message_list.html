@@ -1,0 +1,32 @@
+<div class="jf-common-list jf-my-msglist">
+	
+	#for(x : messagePage.list)
+	<div class="jf-common-item">
+		<div class="row">
+			<a href="/user/#(x.friend)" class="jf-common-logo">
+				<img src="/upload/avatar/#(x.avatar)" />
+			</a>
+			<div class="col">
+				<h1 class="jf-common-name"><a href="/user/#(x.friend)">#(x.nickName)</a></h1>
+				<p class="jf-common-brief">
+					#(x.content)
+				</p>
+				<div class="jf-common-other text-gray text-left">
+					<span>
+						#date(x.createAt, "yyyy-MM-dd HH:mm")
+					</span>
+					<div class="jf-common-opt">
+						<a href="javascript:void(0)" onclick="deleteByFriendId(this, #(x.friend));">删除</a>
+						<a href="/my/message/friend/#(x.friend)">发送私信</a>
+						<a href="/my/message/friend/#(x.friend)">查看私信(#(x.msgCount))</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	#end
+	
+	<!--分页组件-->
+	#@paginate(messagePage.pageNumber, messagePage.totalPage, "/my/message?p=")
+	<!-- 内容区域  end-->
+</div>

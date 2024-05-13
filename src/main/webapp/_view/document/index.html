@@ -1,0 +1,111 @@
+#@layout()
+#define main()
+	<!--左侧菜单-->
+	#include("_menu.html")
+	<!--右侧内容区-->
+	#include("_content.html")
+#end
+
+#define css()
+	<!--<link type="text/css" rel="stylesheet" href="/assets/prettify/sunburst-by-james-for-prettify.css" />-->
+	<link type="text/css" rel="stylesheet" href="/assets/prettify/_darcula-from-highlight-js-by-james.css">
+	<!--<link type="text/css" rel="stylesheet" href="/assets/highlight/darcula-by-james.css">-->
+#end
+#define js()
+	<script type="text/javascript" src="/assets/prettify/prettify.js"></script>
+	<!--<script type="text/javascript" src="/assets/highlight/highlight.pack-9.3.0.js"></script>-->
+	<script type="text/javascript" src="/assets/layer/layer/layer.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("pre").addClass("prettyprint linenums");
+			prettyPrint();
+		});
+		//		$(document).ready(function() {
+		//			$('pre').each(function(i, block) {
+		//				hljs.highlightBlock(block);
+		//			});
+		//		});
+
+		$(document).ready(function() {
+			var currentMenuId = "##(doc.mainMenu)-#(doc.subMenu)";
+			var $currentMenu = $(currentMenuId);
+			$currentMenu.addClass("active");
+			
+			// 将当前被选中菜单滚动到合适的可见位置
+			$("#docscroll").scrollTop($currentMenu.offset().top - 110);
+		});
+		
+		$(document).ready(function() {
+			$("#docscroll").on("click", " ul li a", clickDocMenu);
+		});
+		
+		// ---------------------------------------------------------
+		
+		var isFiexd, fh, hh, docMainContainer;
+		
+		$(document).ready(function() {
+			isFiexd = $("body").hasClass("jf-header-fixed");
+			fh = $(".jf-footer").height();
+			hh = $(".jf-header").height();
+			docMainContainer = $(".jf-page-container");
+		});
+		
+		function initDocScrollFixed(scrollId) {
+			var scroll = $("#" + scrollId);
+			var sh = $(this).scrollTop();
+			var docH = $(document).height();
+			var winH = $(window).height();
+			var scrollHeight = 0;
+			if(sh > (hh + 20)) {
+				scroll.addClass("fixed");
+				
+				if(sh+winH == docH) {
+					scrollHeight = winH - (isFiexd ? hh : 0) - fh - 110;
+				}else{
+					scrollHeight = winH - (isFiexd ? hh : 0) - 80;
+				}
+			} else{
+				scroll.removeClass("fixed");
+				scrollHeight = winH - hh - 80;
+			}
+			scroll.height(scrollHeight);
+		}
+		
+		/**
+		 * 初始化一个Doc类的scroll
+		 * @param {Object} scrollId
+		 */
+		function initDocScroll(scrollId) {
+			var winH = $(window).height();
+			var dh = winH - hh - 40;
+			var scroll = $("#" + scrollId);
+			scroll.height(dh);
+			initDocScrollFixed(scrollId);
+			setTimeout(function() {
+				var sch = scroll.outerHeight() + 20;
+				docMainContainer.css({"min-height" : sch});
+			}, 200);
+		}
+		
+		$(function() {
+			//初始化左侧悬浮章节导航
+			initDocScroll("docscroll");
+			//滚动监听处理漂浮状态
+			$(window).scroll(function() {
+				initDocScrollFixed("docscroll");
+			});
+			//窗口尺寸表更后处理左侧导航位置和尺寸 悬浮状态等
+			$(window).resize(function() {
+				initDocScroll("docscroll");
+			});
+		});
+		
+		
+		$(document).ready(function() {
+			initDocBackAndForward();
+		});
+		
+		
+	</script>
+#end

@@ -1,0 +1,121 @@
+#set(seoTitle="JFinal 极速开发官方社区")
+#@layout()
+#define main()
+<div class="col jf-page-main jf-pdl0">
+
+	### 首页轮播广告
+	#include("_carousel.html")
+	
+	### 分享
+	<div class="jf-panel jf-article-list">
+		<div class="jf-panel-header">
+			<a class="jf-more" href="/share">更多»</a>
+			<h1>分享</h1>
+		</div>
+		<div class="jf-panel-body">
+			<div class="jf-common-list">
+				
+				#for(x : shareList)
+				<div class="jf-common-item">
+					<div class="row">
+						<a href="/user/#(x.accountId)" class="jf-common-logo">
+							<img src="/upload/avatar/#(x.avatar)" />
+						</a>
+						<div class="col">
+							<div class="jf-common-name"><a href="/share/#(x.id)">#(x.title)</a></div>
+							<p class="jf-common-other text-gray">
+								<span class="pull-left">#date(x.createAt)</span>
+								### <span><i class="fa fa-eye"></i>&nbsp;#(x.clickCount)</span>
+								<span style="text-align: right;"><i class="fa fa-thumbs-o-up"></i>&nbsp;#(x.likeCount)</span>
+							</p>
+						</div>
+					</div>
+				</div>
+				#end
+				
+			</div>
+		</div>
+	</div>
+	
+	### 反馈
+	<div class="jf-panel jf-article-list">
+		<div class="jf-panel-header">
+			<a class="jf-more" href="/feedback">更多»</a>
+			<h1>反馈</h1>
+		</div>
+		<div class="jf-panel-body">
+			<div class="jf-common-list">
+				
+				#for(x : feedbackList)
+				<div class="jf-common-item">
+					<div class="row">
+						<a href="/user/#(x.accountId)" class="jf-common-logo">
+							<img src="/upload/avatar/#(x.avatar)" />
+						</a>
+						<div class="col">
+							<div class="jf-common-name"><a href="/feedback/#(x.id)">#(x.title)</a></div>
+							<p class="jf-common-other text-gray">
+								<span class="pull-left">#date(x.createAt)</span>
+								### <span><i class="fa fa-eye"></i>&nbsp;#(x.clickCount)</span>
+								<span style="text-align: right;"><i class="fa fa-thumbs-o-up"></i>&nbsp;#(x.likeCount)</span>
+							</p>
+						</div>
+					</div>
+				</div>
+				#end
+				
+			</div>
+		</div>
+	</div>
+	
+	### 项目
+	<div class="jf-panel jf-article-list">
+		<div class="jf-panel-header">
+			<a class="jf-more" href="/project">更多»</a>
+			<h1>项目</h1>
+		</div>
+		<div class="jf-panel-body">
+			<!--项目列表 start-->
+			<div class="jf-project-list">
+			
+			#setLocal(i=0, j=0)
+			#for(x : projectList)
+				#if(for.first || ++i % 4 == 0)
+				<div class="row">
+				#end
+					<div class="col-3">
+						<div class="jf-project-item jf-transition ">
+							<a href="/project/#(x.id)" class="jf-project-logo">
+								<img src="/upload/avatar/#(x.avatar)" />
+							</a>
+							<h1 class="jf-project-name">
+								<a href="/project/#(x.id)">#(x.title)</a>
+							</h1>
+							
+							#--
+							<p class="jf-project-info">
+								###<span><i class="fa fa-eye"></i>&nbsp;305</span>
+								<span><i class="fa fa-star-o"></i>&nbsp;25</span>
+								<span><i class="fa fa-thumbs-o-up"></i>&nbsp;99</span>
+							</p>
+							--#
+							
+						</div>
+					</div>
+				#if(for.last || ++j % 4 == 0)
+				</div>
+				#end
+			#end
+			
+			</div>
+		</div>
+	</div>
+	
+	
+
+
+</div>
+
+<!-- 包含侧边栏文件 -->
+#include("_sidebar.html")
+#end

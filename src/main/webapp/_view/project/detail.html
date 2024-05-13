@@ -1,0 +1,104 @@
+#@layout()
+#define main()
+<!-- 左侧主体部分 -->
+<div class="col jf-page-main jf-pdl0">
+	<div class="jf-panel jf-article-detail">
+	
+		<div class="jf-panel-header">
+			<h1 class="jf-article-title">#(project.title)</h1>
+			<ul class="jf-article-info">
+				<li>
+					<a href="/user/#(project.accountId)">
+						<img src="/upload/avatar/#(project.avatar)">
+					</a>
+				</li>
+				<li>
+					<a href="/user/#(project.accountId)" class="text-info">#(project.nickName)</a>
+				</li>
+				<li>#date(project.createAt)</li>
+				#--
+				<li>浏览 3468</li>
+				--#
+			</ul>
+		</div>
+		
+		<div class="jf-panel-body mt15 jf-article-content">
+			#(project.content)
+			
+			<!-- 关联项目 点赞 收藏 start-->
+			<div class="row" style="padding:40px 20px 20px 20px;">
+				
+				<div class="jf-project-link font-weight-bold">
+					#if(project)
+						项目：<a href="/project/#(project.id)">#(project.name)</a>
+					#end
+				</div>
+				
+				<div class="col">
+					<div class="jf-like-collect">
+						<a title="收藏">
+							<i class="fa fa-star-o #(ret.isFavoriteActive)"></i>
+							<span>#(ret.favoriteCount)</span>
+						</a>
+						<a title="点赞">
+							<i class="fa fa-thumbs-o-up #(ret.isLikeActive)"></i>
+							<span>#(ret.likeCount)</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+
+</div>
+
+<!-- 包含侧边栏文件 -->
+#include("_sidebar.html")
+#end
+
+#define css()
+	<!--<link type="text/css" rel="stylesheet" href="/assets/prettify/sunburst-by-james-for-prettify.css" />-->
+	<link type="text/css" rel="stylesheet" href="/assets/prettify/_darcula-from-highlight-js-by-james.css">
+	<!--<link type="text/css" rel="stylesheet" href="/assets/highlight/darcula-by-james.css">-->
+#end
+
+#define js()
+	<script type="text/javascript" src="/assets/prettify/prettify.js"></script>
+	<!--<script type="text/javascript" src="/assets/highlight/highlight.pack-9.3.0.js"></script>-->
+	<script type="text/javascript" src="/assets/layer/layer/layer.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("pre").addClass("prettyprint linenums");
+			prettyPrint();
+		});
+//		$(document).ready(function() {
+//			$('pre').each(function(i, block) {
+//				hljs.highlightBlock(block);
+//			});
+//		});
+
+		$(document).ready(function() {
+            // 绑定收藏事件
+            var aMap = {
+                btn: $("i.fa-star-o")
+                , isLoading: false
+                , isAdd: #(ret.isFavoriteAdd)
+            };
+            aMap.btn.bind("click", function() {
+                favorite('project', #(project.id),  aMap);
+            });
+
+            // 绑定点赞事件
+            var bMap = {
+                btn: $("i.fa-thumbs-o-up")
+                , isLoading: false
+                , isAdd: #(ret.isLikeAdd)
+            };
+            bMap.btn.bind("click", function() {
+                like('project', #(project.id), bMap);
+            });
+		});
+	</script>
+#end

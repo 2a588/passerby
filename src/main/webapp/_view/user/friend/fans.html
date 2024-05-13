@@ -1,0 +1,48 @@
+#set(seoTitle=user.nickName + "的粉丝")
+#@layout()
+#define main()
+<!--左侧部分 -->
+#include("../common/_user_left_side.html")
+
+<!--右侧部分 -->
+<div class="col jf-page-main jf-pdr0">
+	<div class="jf-panel jf-my-space-pd"  style="min-height: 456px;">
+		<div class="jf-panel-body">
+			<nav aria-label="breadcrumb ">
+				<ol class="breadcrumb jf-my-breadcrumb">
+					<li class="breadcrumb-item"><a href="/user/#(user.id)">#(user.nickName)</a></li>
+					<li class="breadcrumb-item active" aria-current="page">粉丝</li>
+				</ol>
+			</nav>
+
+			<div class="friends-box">
+				#for(x : fansPage.getList())
+					<div class="friend">
+						<a href="/user/#(x.id)">
+							<img src="/upload/avatar/#(x.avatar)">
+						</a>
+						<a href="/user/#(x.id)" title="#(x.nickName)">#(x.nickName)</a>
+	                    <span id="#(x.id)">&nbsp;</span>
+					</div>
+				#end    
+			</div>
+			
+			#@paginate(fansPage.pageNumber, fansPage.totalPage, "/user/fans/" + user.id + "?p=")
+			
+		</div>
+	</div>
+</div>
+#end
+
+#define js()
+    <script type="text/javascript" src="/assets/js/user-friend-relation-4.0.js"></script>
+    <script type="text/javascript" src="/assets/layer/layer/layer.js"></script>
+    
+    <script type="text/javascript" src="/assets/js/my-space-4.0.js"></script>
+	
+	<script type="text/javascript">
+		$(document).ready(function() {
+			setCurrentUserMenu();
+		});
+	</script>
+#end

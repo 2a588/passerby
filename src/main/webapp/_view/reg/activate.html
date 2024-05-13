@@ -1,0 +1,36 @@
+#set(seoTitle="JFinal 账号激活")
+#@layout()
+#define main()
+<!-- 账号激活结果 panel -->
+<div class="col" style="margin-bottom: 20px;">
+ 	<div class="jf-panel" style="min-height: 400px;">
+		<div class="jf-panel-header" style="margin-top:50px;">
+			<h1 class="jf-login-title text-center">
+				#(ret.isOk() ? "激活成功" : "激活失败")
+			</h1>
+		</div>
+	 	
+		<div id="activateMsgBox" class="jf-panel-body mt15">
+			<!-- 内容区域  start-->
+			#if(ret.isOk())
+				点击前往登录页面，&nbsp;<a href="/login" style="color:blue;">立即登录</a>
+			#else
+				#(ret.msg)
+			#end
+			<!-- 内容区域  end-->
+		</div>
+	</div>
+</div>
+#end
+
+#define css()
+<style type="text/css">
+	#activateMsgBox {
+		min-width: 500px;
+		margin: 30px auto;
+		text-align: center;
+		font-size: 22px;
+	}
+</style>
+#end
+

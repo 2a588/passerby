@@ -1,0 +1,72 @@
+<div class="jf-page-side">
+	
+	#--
+	<!--公告栏-->
+	<div class="jf-panel">
+		<div class="jf-panel-header">
+			<h1><a href=""><i class="fa fa-bullhorn"></i>公告栏</a></h1>
+		</div>
+		<div class="jf-panel-body">
+			<div class="jf-notice-list">
+				<a href="#"><h3>JFinal 3.6 发布，五弹齐发迎新年</h3><span class="jf-common-time">15分钟前</span></a>
+				<a href="#"><h3>JBolt插件 1.6.9 发布，完美支持JFinal-Undertow</h3><span class="jf-common-time">9小时前</span></a>
+			</div>
+		</div>
+	</div>
+	--#
+	
+	#include("/_view/adv/_sponsor.html")
+	
+	<!--最新下载-->
+	<div class="jf-panel">
+		<div class="jf-panel-header">
+			<h1>最新下载</h1>
+		</div>
+		<div class="jf-panel-body">
+			<div class="list-group jf-download-list">
+				
+				<a href="/doc" style="color:red" class="list-group-item list-group-item-action">JFinal 文档 (在线)</a>
+				<a href="/doc/6-1" style="color:red" class="list-group-item list-group-item-action">Enjoy 文档 (在线)</a>
+				
+				#for(x : downloadList)
+				<a href="/download?file=#(x.fileName)" class="list-group-item list-group-item-action">#(x.descr)</a>
+				#end
+				
+			</div>
+		</div>
+	</div>
+	
+	#--
+	<!--捐助社区-->
+	<div class="jf-panel">
+		<div class="jf-panel-header" style="position: relative;">
+			<h1><a href="/donate">捐助社区</a></h1>
+			<span style="position:absolute; top:0; right:0;">
+				<a href="/donate" style="color: #888; font-size:14px;">更多»</a>
+			</span>
+		</div>
+		<div class="jf-panel-body">
+			<ul class="list-group jf-donate-list">
+				#for(x : donateList)
+				<li class="list-group-item">
+					<span class="jf-money">￥#(x.cash)</span>
+					<span class="ml-5">#(x.donater)</span>
+				</li>
+				#end
+			</ul>
+		</div>
+	</div>
+	--#
+	
+	#-- --#
+	<!--扫码入社-->
+	<div class="jf-panel">
+		<div class="jf-panel-header">
+			<h1>扫码入社</h1>
+		</div>
+		<div class="jf-panel-body text-center">
+			<img src="/assets/img/jfinal_weixin_service_qr_code_226.jpg" />
+		</div>
+	</div>
+	
+</div>

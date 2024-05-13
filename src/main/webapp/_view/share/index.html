@@ -1,0 +1,38 @@
+#@layout()
+#define main()
+<div class="col jf-page-main jf-pdl0">
+	<div class="jf-panel jf-article-list">
+		<div class="jf-panel-header">
+			<h1>分享</h1>
+		</div>
+		
+		<div class="jf-panel-body">
+			<!-- 分享 list -->
+			<div class="jf-common-list">
+			#for(x : sharePage.list)
+				<div class="jf-common-item">
+					<div class="row">
+						<a href="/user/#(x.accountId)" class="jf-common-logo">
+							<img src="/upload/avatar/#(x.avatar)" />
+						</a>
+						<div class="col">
+							<div class="jf-common-name"><a href="/share/#(x.id)">#(x.title)</a></div>
+							<p class="jf-common-other text-gray">
+								<span class="pull-left">#date(x.createAt)</span>
+								### <span><i class="fa fa-eye"></i>&nbsp;#(x.clickCount)</span>
+								<span style="text-align: right;"><i class="fa fa-thumbs-o-up"></i>&nbsp;#(x.likeCount)</span>
+							</p>
+						</div>
+					</div>
+				</div>
+			#end
+			</div>
+			#@paginate(sharePage.pageNumber, sharePage.totalPage, "/share?p=")
+		</div>
+		
+	</div>
+</div>
+
+<!-- 包含侧边栏文件 -->
+#include("_sidebar.html")
+#end

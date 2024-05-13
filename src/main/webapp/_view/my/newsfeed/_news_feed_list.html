@@ -1,0 +1,45 @@
+<div class="jf-panel-body">
+	<!-- 内容区域  start-->
+	<div class="jf-common-list jf-my-msglist">
+		
+		#for(x : newsFeedPage.list)
+		<div class="jf-common-item">
+			<div class="row">
+				<a href="/user/#(x.accountId)" class="jf-common-logo">
+					<img src="/upload/avatar/#(x.avatar)" />
+				</a>
+				<div class="col">
+					<div class="jf-common-name">
+						<a href="/user/#(x.accountId)">#(x.nickName)</a>
+					</div>
+					
+					<p class="jf-common-other jf-newsfeed-time text-gray text-left">#date(x.createAt, "yyyy-MM-dd HH:mm")</p>
+					
+					#if(x.text)
+					<p class="jf-common-brief">#(x.text)</p>
+					#end
+					
+					#if(x.ref)
+					<div class="jf-newsfeed-ref">
+						<a href="#(x.ref.href)" target="_blank">#(x.ref.title)</a>
+					</div>
+					#end
+					
+					#if(x.refParent)
+					<div class="jf-msg-targetlink">
+						<a href="/user/#(x.refParent.accountId)"><img src="/upload/avatar/#(x.refParent.avatar)" /></a>
+						<a href="#(x.refParent.href)" target="_blank">#(x.refParent.title)</a>
+					</div>
+					#end
+					
+				</div>
+			</div>
+		</div>
+		#end
+		
+	</div>
+	
+	<!--分页组件-->
+	#@paginate(newsFeedPage.pageNumber, newsFeedPage.totalPage, paginateLink)
+	<!-- 内容区域  end-->
+</div>

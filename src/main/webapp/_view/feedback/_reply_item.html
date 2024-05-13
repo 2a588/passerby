@@ -1,0 +1,32 @@
+#-- 用户渲染 ajax reply 所需要的追加到列表最后的 item  --#
+<div class="jf-common-item">
+	<div class="row">
+		<a href="/user/#(loginAccount.id)" class="jf-common-logo jf-comment-avatar" target="_blank">
+			<img src="/upload/avatar/#(loginAccount.avatar)" />
+		</a>
+		<div class="col">
+			<p>
+				<h1 class="jf-common-name jf-comment-username">
+					<a href="/user/#(loginAccount.id)" target="_blank">#(loginAccount.nickName)</a>
+				</h1>
+				<span class="jf-common-time pull-right">#date(reply.createAt, "yyyy-MM-dd HH:mm")</span>
+			</p>
+			<div class="jf-common-other jf-comment-content text-left">
+				#(reply.content)
+				
+				<div class="jf-reply-and-delete">
+					
+					<a class="jf-reply-icon" href="javascript:void(0);" onclick="deleteReply(this, '/feedback/deleteReply?id=#(reply.id)');">
+						<i class="fa fa-trash"></i>&nbsp;删除
+					</a>
+					
+					<a class="jf-reply-icon" href="#replyContent" onclick="atAndReply('#(loginAccount.nickName)');">
+						<i class="fa fa-commenting-o"></i>&nbsp;回复
+					</a>
+				</div>
+				
+			</div>
+		</div>
+
+	</div>
+</div>

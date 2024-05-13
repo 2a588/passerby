@@ -1,0 +1,66 @@
+<!-- 评论区 panel start-->
+<div class="jf-panel jf-article-reply-box" id="reply_start">
+	<div class="jf-panel-header">
+		###<h1>评论区(<span class="jf-comment-count">20条</span>)</h1>
+		<h1>评论区</h1>
+	</div>
+	<div class="jf-panel-body">
+		<!-- 评论列表list start-->
+		<div class="jf-common-list mt-2">
+			#for(x : replyPage.list)
+			<div class="jf-common-item">
+				<div class="row">
+					<a href="/user/#(x.accountId)" class="jf-common-logo jf-comment-avatar" target="_blank">
+						<img src="/upload/avatar/#(x.avatar)" />
+					</a>
+					<div class="col">
+						<p>
+							<h1 class="jf-common-name jf-comment-username">
+								<a href="/user/#(x.accountId)" target="_blank">#(x.nickName)</a>
+							</h1>
+							<span class="jf-common-time pull-right">#date(x.createAt, "yyyy-MM-dd HH:mm")</span>
+						</p>
+						<div class="jf-common-other jf-comment-content text-left">
+							#(x.content)
+							
+							<div class="jf-reply-and-delete">
+								#if(loginAccount && loginAccount.id == x.accountId)
+								<a class="jf-reply-icon" href="javascript:void(0);" onclick="deleteReply(this, '/share/deleteReply?id=#(x.id)');">
+									<i class="fa fa-trash"></i>&nbsp;删除
+								</a>
+								#end
+								<a class="jf-reply-icon" href="#replyContent" onclick="atAndReply('#(x.nickName)');">
+									<i class="fa fa-commenting-o"></i>&nbsp;回复
+								</a>
+							</div>
+							
+						</div>
+					</div>
+		
+				</div>
+			</div>
+			#end
+			
+			<div class="jf-common-item jf-comment-replyarea">
+				<div class="row">
+					<a href="javascript:void(0);" class="jf-common-logo jf-comment-avatar">
+						<img src="/upload/avatar/#(loginAccount.avatar ?? 'x.jpg')" />
+					</a>
+					<div class="col">
+						<textarea id="replyContent" class="jf-reply-mini-editor" onkeyup="autoHeight(this, 30)" oninput="autoHeight(this, 30)" placeholder="我有话说"></textarea>
+						<button id="submit_btn" class="btn btn-dark jf-ajax-reply-btn" title="按 Ctrl + Enter 发送">发送</button>
+						<img id="submit_loading" class="jf-reply-loading" src="/assets/img/loading-2.gif" >
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	<!-- 评论列表list end-->
+	</div>
+	
+	<!-- 包含分页组件 -->
+	#set(append="#reply_start")
+	#@paginate(replyPage.pageNumber, replyPage.totalPage, "/share/" + share.id + "?p=")
+	
+</div>
+<!-- 评论区 panel end-->

@@ -1,0 +1,66 @@
+### 控制轮播的样式细节
+#define css()
+<style type="text/css">
+	.carousel-item img {
+		width: 880px;
+		height: 280px;
+	}
+</style>
+#end
+
+### 首页轮播广告
+<div class="jf-panel jf-article-list">
+
+<div id="demo" class="carousel slide" data-ride="carousel">
+	
+	<!-- 指示符 -->
+	<ul class="carousel-indicators">
+		### 注意：有多少个轮播就加多少个 li 标签，注意设置好 data-slide-to 的值
+		<li data-target="#demo" data-slide-to="0" class="active"></li>
+		<li data-target="#demo" data-slide-to="1"></li>
+	</ul>
+	
+	### 轮播图片，建议尺寸：300 x 880，建议比例：2.8 : 1
+	<div class="carousel-inner">
+		
+		### class 属性添加了 active 值的将成轮播第一屏
+		<div class="carousel-item active">
+			<a href="https://jfinal.com/club?from=club" target="_blank">
+				<img src="/assets/_carousel/jfinal-club.png">
+			</a>
+			
+			<div class="carousel-caption">
+				### <h3 style="color:red;">点击了解 JFinal 俱乐部专享项目</h3>
+				<h4 style="color:red;">点击了解 JFinal 俱乐部专享项目</h4>
+				### <p>描述文字!</p>
+				### <p style="color:red;">点击了解 JFinal 俱乐部专享项目</p>
+			</div>	
+		</div>
+		
+		<div class="carousel-item">
+			<a href="https://jfinal.com/club?from=club" target="_blank">
+				<img src="/assets/_carousel/lunbo.jpg">
+			</a>
+			
+			#-- 轮播可以添加说明文字
+			<div class="carousel-caption">
+				<h3>第一张图片描述标题</h3>
+				<p>描述文字!</p>
+			</div>
+			--#
+		</div>
+		
+	</div>
+	
+	### 左右切换按钮
+	<a class="carousel-control-prev" href="#demo" data-slide="prev">
+		<span class="carousel-control-prev-icon"></span>
+	</a>
+	
+	<a class="carousel-control-next" href="#demo" data-slide="next">
+		<span class="carousel-control-next-icon"></span>
+	</a>
+	
+</div> ### 轮播结束
+
+</div> ### jf-panel 结束

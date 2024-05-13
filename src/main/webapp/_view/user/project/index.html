@@ -1,0 +1,63 @@
+#set(seoTitle=user.nickName + "的项目")
+#@layout()
+#define main()
+<!--左侧部分 -->
+#include("../common/_user_left_side.html")
+
+<!--右侧部分 -->
+<div class="col jf-page-main jf-pdr0">
+	<div class="jf-panel jf-my-space-pd" style="min-height: 456px;">
+		<div class="jf-panel-body">
+			
+			<!-- 内容区域  start-->
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb jf-my-breadcrumb">
+					<li class="breadcrumb-item"><a href="/user/#(user.id)">#(user.nickName)</a></li>
+					<li class="breadcrumb-item active" aria-current="page">项目</li>
+				</ol>
+			</nav>
+			
+			<div class="jf-project-list jf-my" id="project_list">
+			
+			#setLocal(i=0, j=0)
+			#for(x : projectList)
+				#if(for.first || ++i % 3 == 0)
+				<div class="row">
+				#end
+					<div class="col-4">
+						<div class="jf-project-item  jf-transition ">
+							<a href="/project/#(x.id)" target="_blank" class="jf-project-logo">
+								<img src="/upload/avatar/#(user.avatar)" />
+							</a>
+							<h1 class="jf-project-name">
+								<a style="height:100%;" href="/project/#(x.id)" target="_blank">#(x.title)</a>
+							</h1>
+							
+							### 暂不开启点赞、访问等数据显示
+							### <p class="jf-project-info"><span><i class="fa fa-eye"></i>&nbsp;305</span><span><i class="fa fa-star"></i>&nbsp;25</span><span><i class="fa fa-thumbs-o-up"></i>&nbsp;99</span></p>
+							
+						</div>
+					</div>
+				#if(for.last || ++j % 3 == 0)
+				</div>
+				#end
+			#end
+			
+			</div> 
+			<!-- 内容区域  end-->
+			
+		</div>
+	</div>
+</div>
+#end
+
+#define js()
+    <script type="text/javascript" src="/assets/js/my-space-4.0.js"></script>
+    <script type="text/javascript" src="/assets/layer/layer/layer.js"></script>
+	
+	<script type="text/javascript">
+		$(document).ready(function() {
+			setCurrentUserMenu();
+		});
+	</script>
+#end

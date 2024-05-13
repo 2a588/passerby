@@ -1,0 +1,55 @@
+#@layout()
+#define main()
+<!--左侧主体内容部分-->
+<div class="col jf-page-main jf-pdl0">
+	<div class="jf-panel jf-article-list">
+		<div class="jf-panel-header">
+			<h1>项目</h1>
+		</div>
+		<div class="jf-panel-body">
+			<!--项目列表 start-->
+			<div class="jf-project-list">
+			
+			#setLocal(i=0, j=0)
+			#for(x : projectPage.list)
+				#if(for.first || ++i % 4 == 0)
+				<div class="row">
+				#end
+					<div class="col-3">
+						<div class="jf-project-item jf-transition ">
+							<a href="/project/#(x.id)" class="jf-project-logo">
+								<img src="/upload/avatar/#(x.avatar)" />
+							</a>
+							<h1 class="jf-project-name">
+								<a href="/project/#(x.id)">#(x.title)</a>
+							</h1>
+							
+							#--
+							<p class="jf-project-info">
+								###<span><i class="fa fa-eye"></i>&nbsp;305</span>
+								<span><i class="fa fa-star-o"></i>&nbsp;25</span>
+								<span><i class="fa fa-thumbs-o-up"></i>&nbsp;99</span>
+							</p>
+							--#
+							
+						</div>
+					</div>
+				#if(for.last || ++j % 4 == 0)
+				</div>
+				#end
+			#end
+			
+			</div>
+			<!--项目列表 end-->
+			
+			<!--分页组件-->
+			#@paginate(projectPage.pageNumber, projectPage.totalPage, "/project?p=")
+		</div>
+		
+	</div>
+</div>
+
+<!-- 包含侧边栏文件 -->
+#include("_sidebar.html")
+#end
+
