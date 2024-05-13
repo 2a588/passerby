@@ -27,7 +27,6 @@ import com.icuscn.passerby.common.kit.DruidKit;
 import com.icuscn.passerby.common.model.*;
 import com.icuscn.passerby.login.LoginService;
 //import com.icuscn.passerby.my.friend.FriendInterceptor;
-import com.icuscn.passerby.common.model.*;
 import com.jfinal.config.*;
 import com.jfinal.json.MixedJsonFactory;
 import com.jfinal.kit.Prop;
@@ -45,7 +44,7 @@ import java.sql.Connection;
 /**
  * JFinalClubConfig
  */
-public class JFinalClubConfig extends JFinalConfig {
+public class PasserbyConfig extends JFinalConfig {
 	
 	// 使用 jfinal-undertow 时此处仅保留声明，不能有加载代码
 	private static Prop p;
@@ -57,7 +56,7 @@ public class JFinalClubConfig extends JFinalConfig {
 	 * 可以放置在任意的 Class 类定义中，不一定要放于此
 	 */
 	public static void main(String[] args) {
-		UndertowServer.start(JFinalClubConfig.class);
+		UndertowServer.start(PasserbyConfig.class);
 	}
 	
 	/**

@@ -14,7 +14,7 @@
 
 package com.icuscn.passerby.common.model;
 
-import com.icuscn.passerby.common.JFinalClubConfig;
+import com.icuscn.passerby.common.PasserbyConfig;
 import com.jfinal.kit.PathKit;
 import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.plugin.activerecord.generator.Generator;
@@ -51,7 +51,7 @@ public class _Generator {
 	 * 重用 JFinalClubConfig 中的数据源配置，避免冗余配置
 	 */
 	public static DataSource getDataSource() {
-		DruidPlugin druidPlugin = JFinalClubConfig.getDruidPlugin();
+		DruidPlugin druidPlugin = PasserbyConfig.getDruidPlugin();
 		druidPlugin.start();
 		return druidPlugin.getDataSource();
 	}
