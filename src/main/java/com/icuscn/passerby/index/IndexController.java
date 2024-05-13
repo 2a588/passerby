@@ -10,9 +10,7 @@
  * JFinal 俱乐部是五年以来首次寻求外部资源的尝试，以便于有资源创建更加
  * 高品质的产品与服务，为大家带来更大的价值，所以请大家多多支持，不要将
  * 首次的尝试扼杀在了摇篮之中
- */
-
-package com.icuscn.passerby.index;
+ */package com.icuscn.passerby.index;
 
 import com.icuscn.passerby.common.controller.BaseController;
 import com.icuscn.passerby.common.interceptor.AuthCacheClearInterceptor;

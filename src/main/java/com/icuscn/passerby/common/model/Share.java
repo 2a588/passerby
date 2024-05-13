@@ -10,9 +10,7 @@
  * JFinal 俱乐部是五年以来首次寻求外部资源的尝试，以便于有资源创建更加
  * 高品质的产品与服务，为大家带来更大的价值，所以请大家多多支持，不要将
  * 首次的尝试扼杀在了摇篮之中
- */
-
-package com.icuscn.passerby.common.model;
+ */package com.icuscn.passerby.common.model;
 
 import com.icuscn.passerby.common.model.base.BaseShare;
 import com.icuscn.passerby.common.safe.JsoupFilter;
