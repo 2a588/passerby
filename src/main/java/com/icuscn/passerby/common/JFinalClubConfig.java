@@ -24,9 +24,9 @@ import com.icuscn.passerby._admin.role.RoleDirective;
 import com.icuscn.passerby.common.handler.UrlSeoHandler;
 import com.icuscn.passerby.common.interceptor.LoginSessionInterceptor;
 import com.icuscn.passerby.common.kit.DruidKit;
-import com.hongson.xing.common.model.*;
+import com.icuscn.passerby.common.model.*;
 import com.icuscn.passerby.login.LoginService;
-//import com.hongson.xing.my.friend.FriendInterceptor;
+//import com.icuscn.passerby.my.friend.FriendInterceptor;
 import com.icuscn.passerby.common.model.*;
 import com.jfinal.config.*;
 import com.jfinal.json.MixedJsonFactory;
@@ -107,8 +107,8 @@ public class JFinalClubConfig extends JFinalConfig {
 				setBaseViewPath("/_view/_admin");
 				
 				// 如果被扫描的包在 jar 文件之中，需要添加如下配置：
-				// undertow.hotSwapClassPrefix = com.hongson.xing._admin.
-				scan("com.hongson.xing._admin.");
+				// undertow.hotSwapClassPrefix = com.icuscn.passerby._admin.
+				scan("com.icuscn.passerby._admin.");
 			}
 		});
 		
@@ -127,10 +127,10 @@ public class JFinalClubConfig extends JFinalConfig {
 				setBaseViewPath("/_view");
 				
 				// 如果被扫描的包在 jar 文件之中，需要添加如下配置：
-				// undertow.hotSwapClassPrefix = com.hongson.xing.
-				scan("com.hongson.xing.", className -> {
+				// undertow.hotSwapClassPrefix = com.icuscn.passerby.
+				scan("com.icuscn.passerby.", className -> {
 					// className 为当前正扫描的类名，返回 true 时表示过滤掉当前类不扫描
-					return className.startsWith("com.hongson.xing._admin.");
+					return className.startsWith("com.icuscn.passerby._admin.");
 				});
 			}
 		});

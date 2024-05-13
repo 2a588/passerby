@@ -19,8 +19,8 @@ import com.icuscn.passerby.common.pageview.PageViewInterceptor;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Inject;
 import com.icuscn.passerby.common.model.Project;
-//import com.hongson.xing.my.favorite.FavoriteService;
-//import com.hongson.xing.my.like.LikeService;
+//import com.icuscn.passerby.my.favorite.FavoriteService;
+//import com.icuscn.passerby.my.like.LikeService;
 import com.jfinal.core.Path;
 import com.jfinal.kit.Ret;
 

@@ -35,7 +35,7 @@ public class PermissionAdminController extends BaseController {
 
 	public void index() {
 		Page<Permission> permissionPage = srv.paginate(getParaToInt("p", 1));
-		srv.replaceControllerPrefix(permissionPage, "com.hongson.xing._admin.", "...");
+		srv.replaceControllerPrefix(permissionPage, "com.icuscn.passerby._admin.", "...");
 		boolean hasRemovedPermission = srv.markRemovedActionKey(permissionPage);
 		setAttr("permissionPage", permissionPage);
 		setAttr("hasRemovedPermission", hasRemovedPermission);

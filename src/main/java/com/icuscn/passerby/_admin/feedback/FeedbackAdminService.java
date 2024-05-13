@@ -19,7 +19,7 @@ package com.icuscn.passerby._admin.feedback;
 
 import com.icuscn.passerby.common.model.Feedback;
 import com.icuscn.passerby.common.model.FeedbackReply;
-//import com.hongson.xing.my.feedback.MyFeedbackService;
+//import com.icuscn.passerby.my.feedback.MyFeedbackService;
 import com.jfinal.kit.Ret;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;

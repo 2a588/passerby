@@ -21,7 +21,7 @@ import com.icuscn.passerby.common.controller.BaseController;
 import com.icuscn.passerby.common.model.Project;
 import com.jfinal.aop.Inject;
 import com.icuscn.passerby.index.IndexService;
-//import com.hongson.xing.my.project.MyProjectValidator;
+//import com.icuscn.passerby.my.project.MyProjectValidator;
 //import project.com.icuscn.passerby.ProjectService;
 import com.jfinal.core.Path;
 import com.jfinal.kit.Ret;

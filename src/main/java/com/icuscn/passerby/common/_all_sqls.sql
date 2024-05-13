@@ -5,16 +5,16 @@
    例如定义通用的 CRUD 模板函数
 
 #namespace("index")
-#include("/com/hongson/xing/index/index.sql")
+#include("/com/icuscn/passerby/index/index.sql")
 #end
 
 
 
 #namespace("project")
-#include("/com/hongson/xing/project/project.sql")
+#include("/com/icuscn/passerby/project/project.sql")
 #end
 
 #namespace("admin.auth")
-#include("/com/hongson/xing/_admin/auth/admin_auth.sql")
+#include("/com/icuscn/passerby/_admin/auth/admin_auth.sql")
 #end
 

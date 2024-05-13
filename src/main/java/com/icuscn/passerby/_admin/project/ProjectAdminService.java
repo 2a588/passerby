@@ -18,7 +18,7 @@
 package com.icuscn.passerby._admin.project;
 
 import com.icuscn.passerby.common.model.Project;
-//import com.hongson.xing.my.project.MyProjectService;
+//import com.icuscn.passerby.my.project.MyProjectService;
 import com.jfinal.kit.Ret;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;

@@ -24,7 +24,7 @@ import com.icuscn.passerby.common.model.Account;
 import com.icuscn.passerby.common.model.Role;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.Inject;
-//import com.hongson.xing.my.setting.MySettingService;
+//import com.icuscn.passerby.my.setting.MySettingService;
 import com.jfinal.core.Path;
 import com.jfinal.kit.Ret;
 import com.jfinal.plugin.activerecord.Page;

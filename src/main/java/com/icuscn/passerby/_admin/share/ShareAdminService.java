@@ -19,7 +19,7 @@ package com.icuscn.passerby._admin.share;
 
 import com.icuscn.passerby.common.model.Share;
 import com.icuscn.passerby.common.model.ShareReply;
-//import com.hongson.xing.my.share.MyShareService;
+//import com.icuscn.passerby.my.share.MyShareService;
 import com.jfinal.kit.Ret;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;

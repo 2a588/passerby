@@ -14,8 +14,8 @@
 
 package com.icuscn.passerby.common.report;
 
-import com.hongson.xing.common.model.*;
 import com.icuscn.passerby.common.model.*;
+
 
 /**
  * 举报业务

@@ -84,8 +84,8 @@ public class PermissionAdminService {
 	 * 替换控制器前缀，界面显示时更加美观
 	 *
 	 * 例子：
-	 * replaceControllerPrefix(permissionPage, "com.hongson.xing._admin.", "...");
-	 * 以上例子将 "com.hongson.xing._admin." 这一长串前缀替换成 "..."，显示更美观
+	 * replaceControllerPrefix(permissionPage, "com.icuscn.passerby._admin.", "...");
+	 * 以上例子将 "com.icuscn.passerby._admin." 这一长串前缀替换成 "..."，显示更美观
 	 */
 	public void replaceControllerPrefix(Page<Permission> permissionPage, String replaceTarget, String replacement) {
 		for (Permission p : permissionPage.getList()) {

@@ -18,7 +18,7 @@
 package com.icuscn.passerby._admin.account;
 
 import com.icuscn.passerby.common.kit.SensitiveWordsKit;
-//import com.hongson.xing.reg.RegValidator;
+//import com.icuscn.passerby.reg.RegValidator;
 import com.jfinal.core.Controller;
 import com.jfinal.validate.Validator;
 

@@ -20,7 +20,7 @@ import com.jfinal.aop.Invocation;
 import com.icuscn.passerby.common.kit.IpKit;
 import com.icuscn.passerby.common.model.Account;
 import com.icuscn.passerby.login.LoginService;
-//import com.hongson.xing.my.newsfeed.RemindService;
+//import com.icuscn.passerby.my.newsfeed.RemindService;
 import com.jfinal.core.Controller;
 
 /**
