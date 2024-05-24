@@ -1,7 +1,7 @@
 #主要配置
-jdbcUrl=jdbc:mysql://172.16.168.181:3306/jfinal_club?characterEncoding=utf8&useSSL=false&zeroDateTimeBehavior=convertToNull
+jdbcUrl=jdbc:mysql://127.0.0.1:3306/passerby?characterEncoding=utf8&useSSL=false&zeroDateTimeBehavior=convertToNull
 user=root
-password=root1234
+password=root
 devMode=true
 engineDevMode=true
 
